@@ -1,14 +1,3 @@
-# Install AWS CLI if not already installed
-if ! command -v aws &> /dev/null; then
-  echo "AWS CLI not found. Installing..."
-  sudo yum install -y unzip
-  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-  unzip -o awscliv2.zip
-  sudo ./aws/install
-fi
-
-
-
 #AMI=ami-0b4f379183e5706b9 #this keeps on changing
 AMI=ami-09c813fb71547fc4f
 SG_ID=sg-0544c498e225746f0 #replace with your SG ID
