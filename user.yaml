@@ -2,7 +2,7 @@
   hosts: user
   become: yes
   tasks:
-    - name: disable old nodejs and enable nodejs:18
+    - name: disable old nodejs and enable nodejs 20
       ansible.builtin.shell: dnf module disable nodejs -y; dnf module enable nodejs:20 -y
     
     - name: install nodejs
@@ -41,6 +41,7 @@
 
     - name: install  dependencies
       community.general.npm:
+        path: /app  
       
     - name: copy user service
       ansible.builtin.copy:
@@ -75,11 +76,11 @@
   #     ansible.builtin.command: mongo --host mongodb.aws76s.online < /app/schema/user.js
   #     when: user_count.stdout == "0"
 
-  #   - name: start and enable user
-  #     ansible.builtin.service:
-  #       name: user
-  #       state: restarted
-  #       enabled: yes
+    - name: start and enable user
+      ansible.builtin.service:
+        name: user
+        state: started
+        enabled: yes
     
 
 

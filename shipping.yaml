@@ -6,16 +6,19 @@
   tasks:
     - name: install maven & mysql
       ansible.builtin.dnf:
-        name: "{{ item}}"
-        state: present
+        name: "{{ item }}"
+        state: installed  
       loop:
       - maven
       - mysql
 
-    - name: install PyMySQL and cruptography
+    - name: install PyMySQL and cryptography
       ansible.builtin.pip:
         name: "{{ item }}"  
         executable: pip3.9
+      loop
+      - cryptography
+      - PyMySQL
 
     - name: Recursively remove existing directory
       ansible.builtin.file:
