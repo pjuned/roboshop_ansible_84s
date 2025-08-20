@@ -1,0 +1,42 @@
+- name: install redis component
+  hosts: redis
+  become: yes
+  tasks:
+    - name: disable redis default module
+      ansible.builtin.command: dnf module disable redis -y
+
+    - name: enable redis 7
+      ansible.builtin.command: dnf module enable redis:7 -y
+
+  
+    # - name: install remi-release 8
+    #   ansible.builtin.dnf: 
+    #     #name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+    #     name: https://rpms.remirepo.net/enterprise/8/remi/x86_64/remi-release-8.6-1.el8.remi.noarch.rpm
+    #     state: present
+    #     disable_gpg_check: true
+
+    
+    - name: install redis
+      ansible.builtin.dnf:
+        name: redis
+        state: present
+
+    - name: disable protected mode
+      ansible.builtin.lineinfile:
+      path: /etc/redis/redis.conf
+      regexp: 'protected-mode'
+      line: protected-mode no
+
+    - name: allow remote connections
+      ansible.builtin.replace:
+        path: /etc/redis/redis.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
+
+    - name: start and enable redis
+      ansible.builtin.service:
+        name: redis
+        state: started
+        enabled: yes
+
