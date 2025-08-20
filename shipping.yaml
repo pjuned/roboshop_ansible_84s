@@ -1,8 +1,8 @@
 - name: shipping
   hosts: shipping
   become: yes
-  vars:
-    mysql_pwd: RoboShop@1
+  # vars:
+  #   mysql_pwd: RoboShop@1
   tasks:
     - name: install maven & mysql
       ansible.builtin.dnf:
@@ -80,7 +80,7 @@
       community.mysql.mysql_db:
         name: all
         login_user: root
-        login_password: mysql_pwd
+        #login_password: mysql_pwd
         login_host: mysql.aws76s.online
         login_unix_socket: ""
         state: import
