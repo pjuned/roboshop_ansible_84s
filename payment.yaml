@@ -5,7 +5,7 @@
     - name: install python packages
       ansible.builtin.dnf:
         name: "{{ item }}"
-        state: present
+        state: installed
       loop:
         - python36
         - gcc
