@@ -41,8 +41,8 @@
     
 
     
-- name: install web component
-  hosts: web
+- name: install frontend component
+  hosts: frontend
   become: yes
   tasks:
   - name: disable default nginx
