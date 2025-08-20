@@ -48,7 +48,7 @@
   - name: disable default nginx
     ansible.builtin.command: dnf module disable nginx -y
 
-  - name: install default nginx
+  - name: enable nginx:1.24
     ansible.builtin.command: dnf module enable nginx:1.24 -y
 
   - name: install nginx
@@ -83,9 +83,9 @@
       state: absent
 
 
-  - name: copy roboshop configuration
+  - name: copy roboshop nginx configuration
     ansible.builtin.copy:
-      src: roboshop.conf
+      src: nginx.conf
       dest: /etc/nginx/nginx.conf
 
   - name: start and enable nginx
