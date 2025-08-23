@@ -26,6 +26,7 @@
         shell: /sbin/nologin
         system: true
         home: /app
+        force: yes
 
    
     
